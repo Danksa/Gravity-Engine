@@ -75,6 +75,11 @@ public class Vector2
 		return this;
 	}
 	
+	public double dot(Vector2 v)
+	{
+		return x * v.x + y * v.y;
+	}
+	
 	public double distanceTo(Vector2 v)
 	{
 		return distanceBetween(this, v);

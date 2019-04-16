@@ -4,10 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class Vector2Test
 {
+	private static final double		MAX_ERROR = 0.0000000001d;
+	
 	@Test
 	public void shouldInstantiateWithoutParameters()
 	{
@@ -44,7 +46,7 @@ public class Vector2Test
 	{
 		Vector2 v = new Vector2(4.0d, 7.0d);
 		
-		assertEquals(4.0d, v.x, 0.000001d);
+		assertEquals(4.0d, v.x, MAX_ERROR);
 	}
 	
 	@Test
@@ -91,8 +93,8 @@ public class Vector2Test
 		
 		assertNotEquals(vCopy, target);	// should not be same instance as target
 		assertEquals(vCopy, v); // should return same instance as acton upon instance
-		assertEquals(target.x, v.x, 0.0000001d);
-		assertEquals(target.y, v.y, 0.0000001d);
+		assertEquals(target.x, v.x, MAX_ERROR);
+		assertEquals(target.y, v.y, MAX_ERROR);
 	}
 	
 	@Test
@@ -100,16 +102,16 @@ public class Vector2Test
 	{
 		Vector2 v = new Vector2(5.0d, 0.0d);
 		
-		assertEquals(5.0d, v.magnitude(), 0.0000001d);
+		assertEquals(5.0d, v.magnitude(), MAX_ERROR);
 		
 		v.setTo(-4.0d, 0.0d);
-		assertEquals(4.0d, v.magnitude(), 0.0000001d);
+		assertEquals(4.0d, v.magnitude(), MAX_ERROR);
 		
 		v.setTo(2.0d, 2.0d);
-		assertEquals(2.0d * Math.sqrt(2.0d), v.magnitude(), 0.0000001d);
+		assertEquals(2.0d * Math.sqrt(2.0d), v.magnitude(), MAX_ERROR);
 		
 		v.setTo(-3.0d, 4.0d);
-		assertEquals(5.0d, v.magnitude(), 0.0000001d);
+		assertEquals(5.0d, v.magnitude(), MAX_ERROR);
 	}
 	
 	@Test
@@ -117,16 +119,16 @@ public class Vector2Test
 	{
 		Vector2 v = new Vector2(5.0d, 0.0d);
 		
-		assertEquals(25.0d, v.squaredMagnitude(), 0.0000001d);
+		assertEquals(25.0d, v.squaredMagnitude(), MAX_ERROR);
 		
 		v.setTo(-4.0d, 0.0d);
-		assertEquals(16.0d, v.squaredMagnitude(), 0.0000001d);
+		assertEquals(16.0d, v.squaredMagnitude(), MAX_ERROR);
 		
 		v.setTo(2.0d, 2.0d);
-		assertEquals(8.0d, v.squaredMagnitude(), 0.0000001d);
+		assertEquals(8.0d, v.squaredMagnitude(), MAX_ERROR);
 		
 		v.setTo(-3.0d, 4.0d);
-		assertEquals(25.0d, v.squaredMagnitude(), 0.0000001d);
+		assertEquals(25.0d, v.squaredMagnitude(), MAX_ERROR);
 	}
 	
 	@Test
@@ -137,9 +139,9 @@ public class Vector2Test
 		Vector2 vSame = v.normalize();
 		
 		assertEquals(vSame, v);
-		assertEquals(1.0d, v.magnitude(), 0.0000001d);
-		assertEquals(Math.sqrt(5.0d) / 5.0d, v.x, 0.0000001d);
-		assertEquals(-2.0d * Math.sqrt(5.0d) / 5.0d, v.y, 0.0000001d);
+		assertEquals(1.0d, v.magnitude(), MAX_ERROR);
+		assertEquals(Math.sqrt(5.0d) / 5.0d, v.x, MAX_ERROR);
+		assertEquals(-2.0d * Math.sqrt(5.0d) / 5.0d, v.y, MAX_ERROR);
 	}
 	
 	@Test
@@ -150,8 +152,8 @@ public class Vector2Test
 		Vector2 vSame = v.translate(-1.0d, -2.0d);
 		
 		assertEquals(v, vSame);
-		assertEquals(0.0d, v.x, 0.0000001d);
-		assertEquals(0.0d, v.y, 0.0000001d);
+		assertEquals(0.0d, v.x, MAX_ERROR);
+		assertEquals(0.0d, v.y, MAX_ERROR);
 	}
 	
 	@Test
@@ -163,8 +165,8 @@ public class Vector2Test
 		Vector2 result = a.add(b);
 		
 		assertEquals(a, result);
-		assertEquals(5.0d, result.x, 0.0000001d);
-		assertEquals(5.0d, result.y, 0.0000001d);
+		assertEquals(5.0d, result.x, MAX_ERROR);
+		assertEquals(5.0d, result.y, MAX_ERROR);
 	}
 	
 	@Test
@@ -176,8 +178,8 @@ public class Vector2Test
 		Vector2 result = a.subtract(b);
 		
 		assertEquals(a, result);
-		assertEquals(9.0d, result.x, 0.0000001d);
-		assertEquals(-4.0d, result.y, 0.0000001d);
+		assertEquals(9.0d, result.x, MAX_ERROR);
+		assertEquals(-4.0d, result.y, MAX_ERROR);
 	}
 	
 	@Test
@@ -188,8 +190,8 @@ public class Vector2Test
 		Vector2 inverted = v.invert();
 		
 		assertEquals(v, inverted);
-		assertEquals(3.0d, inverted.x, 0.0000000001d);
-		assertEquals(-2.0d, inverted.y, 0.0000000001d);
+		assertEquals(3.0d, inverted.x, MAX_ERROR);
+		assertEquals(-2.0d, inverted.y, MAX_ERROR);
 	}
 	
 	@Test
@@ -200,15 +202,15 @@ public class Vector2Test
 		
 		double dist = Vector2.distanceBetween(a, b);
 		
-		assertEquals(6.0d, dist, 0.0000000001d);
+		assertEquals(6.0d, dist, MAX_ERROR);
 		
 		b.setTo(a);
 		dist = Vector2.distanceBetween(a, b);
-		assertEquals(0.0d, dist, 0.0000000001d);
+		assertEquals(0.0d, dist, MAX_ERROR);
 		
 		b.setTo(a.x, a.y + 5.0d);
 		dist = Vector2.distanceBetween(a, b);
-		assertEquals(5.0d, dist, 0.0000000001d);
+		assertEquals(5.0d, dist, MAX_ERROR);
 	}
 	
 	@Test
@@ -219,15 +221,15 @@ public class Vector2Test
 		
 		double dist = Vector2.squaredDistanceBetween(a, b);
 		
-		assertEquals(36.0d, dist, 0.0000000001d);
+		assertEquals(36.0d, dist, MAX_ERROR);
 		
 		b.setTo(a);
 		dist = Vector2.squaredDistanceBetween(a, b);
-		assertEquals(0.0d, dist, 0.0000000001d);
+		assertEquals(0.0d, dist, MAX_ERROR);
 		
 		b.setTo(a.x, a.y + 5.0d);
 		dist = Vector2.squaredDistanceBetween(a, b);
-		assertEquals(25.0d, dist, 0.0000000001d);
+		assertEquals(25.0d, dist, MAX_ERROR);
 	}
 	
 	@Test
@@ -236,8 +238,8 @@ public class Vector2Test
 		Vector2 a = new Vector2(1.0d, 1.0d);
 		Vector2 b = new Vector2(1.0d, 5.0d);
 		
-		assertEquals(4.0d, a.distanceTo(b), 0.0000000001d);
-		assertEquals(4.0d, b.distanceTo(a), 0.0000000001d);
+		assertEquals(4.0d, a.distanceTo(b), MAX_ERROR);
+		assertEquals(4.0d, b.distanceTo(a), MAX_ERROR);
 	}
 	
 	@Test
@@ -246,7 +248,13 @@ public class Vector2Test
 		Vector2 a = new Vector2(1.0d, 1.0d);
 		Vector2 b = new Vector2(1.0d, 5.0d);
 		
-		assertEquals(16.0d, a.squaredDistanceTo(b), 0.0000000001d);
-		assertEquals(16.0d, b.squaredDistanceTo(a), 0.0000000001d);
+		assertEquals(16.0d, a.squaredDistanceTo(b), MAX_ERROR);
+		assertEquals(16.0d, b.squaredDistanceTo(a), MAX_ERROR);
+	}
+	
+	@Test
+	public void shouldReturnDotProduct()
+	{
+		
 	}
 }
